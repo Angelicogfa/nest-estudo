@@ -5,9 +5,9 @@ export class LoggerMiddleware implements NestMiddleware {
 
     resolve(...args: any[]): MiddlewareFunction | Promise<MiddlewareFunction> {
         return (req: Request, resp: Response, next: Function) => {
-            console.log('request logada');
+            console.log('middleware log - request logada');
             next();
-            console.log('Response logada');
+            console.log('middleware log - Response logada');
         };
     }
 

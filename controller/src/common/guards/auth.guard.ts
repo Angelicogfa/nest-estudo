@@ -12,8 +12,8 @@ export class AuthGuard implements CanActivate {
     }
 
     private async ValidateRequest(request: any): Promise<boolean> {
-
-        request.user = { id: '123', roles:[ 'read'] };
+        console.log('Autenticando...');
+        request.user = { id: '123', roles:[ 'read', 'write'] };
         return true;
     }
 }

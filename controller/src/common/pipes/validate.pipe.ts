@@ -1,4 +1,4 @@
-import { PipeTransform, ArgumentMetadata, BadRequestException } from "@nestjs/common";
+import { PipeTransform, ArgumentMetadata, BadRequestException, Logger } from "@nestjs/common";
 import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
 import { ValidatePipeOptions } from "./validate-pipes-options.pipe";
@@ -12,6 +12,7 @@ export class ValidatePipe implements PipeTransform {
 
     async transform(value: any, { metatype }: ArgumentMetadata): Promise<any> {
 
+        console.log('Validando body');
         if (!metatype && !this.toValidate(metatype))
             return value;
 
