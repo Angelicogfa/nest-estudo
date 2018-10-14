@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Post, HttpCode, Param, Body, BadGatewayException, ForbiddenException, UseFilters, Pipe, UsePipes } from '@nestjs/common';
+import { Controller, Get, Req, Post, HttpCode, Param, Body, BadGatewayException, ForbiddenException, UseFilters, Pipe, UsePipes, ReflectMetadata, UseGuards } from '@nestjs/common';
 import { CrateCatDto } from './dto/create-cat-dto.models';
 import { Cat } from './interfaces/cat.model';
 import { CatService } from './cat.service';
@@ -6,9 +6,11 @@ import { HttpExceptionFilter } from '../common/filters/http-exception.filter';
 import { JoiValidatePipe } from '../common/pipes/joi-validate.pipe';
 import { CatJoiSchema } from './schemas/cat-joi.schema';
 import { ValidatePipe } from '../common/pipes/validate.pipe';
+import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
+import { Roles } from '../common/guards/roles.decorator';
+import { RolesGuard } from '../common/guards/roles.guard';
 
 @Controller('cat')
-@UseFilters(new HttpExceptionFilter())
 export class CatController {
 
     constructor(readonly catService: CatService) {
@@ -51,14 +53,23 @@ export class CatController {
     // }
 
     @Get()
+    @Roles('read')
     async findAll(): Promise<Cat[]> {
         return this.catService.findAll();
     }
 
+    @Get(':id')
+    @Roles('read')
+    async findOne(@Param('id', new ParseIntPipe()) id: number) {
+        return await this.catService.findOne(id);
+    }
+
     @Post()
+    //@ReflectMetadata('roles', ['admin'])
     //@UsePipes(new JoiValidatePipe(CatJoiSchema))
-    //@UsePipes(new ValidatePipe())
-    create(@Body(new ValidatePipe()) model: CrateCatDto) {
+    @Roles('write')
+    @UsePipes(new ValidatePipe({ convert: true }))
+    create(@Body() model: CrateCatDto) {
         this.catService.create(model);
     }
 
