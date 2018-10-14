@@ -4,7 +4,7 @@ import { AuthGuard } from './common/guards/auth.guard';
 import { RolesGuard } from './common/guards/roles.guard';
 import { ArgumentOutOfRangeError } from 'rxjs';
 import { TransformeInterceptor } from './common/interceptors/transforme.interceptor';
-import { ExcludeNullInterceptor } from 'common/interceptors/exclude-null.interceptor';
+import { ExcludeNullInterceptor } from './common/interceptors/exclude-null.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
