@@ -1,7 +1,8 @@
-import { NestInterceptor, ExecutionContext } from "@nestjs/common";
+import { NestInterceptor, ExecutionContext, Injectable } from "@nestjs/common";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
+@Injectable()
 export class ExcludeNullInterceptor implements NestInterceptor<any, any>{
    
     intercept(context: ExecutionContext, call$: Observable<any>): Observable<any> {
