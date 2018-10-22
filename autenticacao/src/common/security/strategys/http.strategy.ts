@@ -2,10 +2,11 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { Strategy } from "passport-http-bearer";
 import { PassportStrategy } from "@nestjs/passport";
 import { SecurityService } from "../services/security.service";
+import { JwtService } from "@nestjs/jwt";
 
 
 @Injectable()
-export class HttpStrategy extends PassportStrategy(Strategy) {
+export class HttpStrategy extends PassportStrategy(Strategy, 'bearer') {
 
     constructor(private readonly securityService: SecurityService) {
         super();
