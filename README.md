@@ -5,7 +5,7 @@ Os projetos têm como finalidade o estudo do framework NestJS para NodeJs. Eles 
 
 Sequência
 
-* Hello-worl
+* Hello-world
 * Controller
 * Autenticação
 
