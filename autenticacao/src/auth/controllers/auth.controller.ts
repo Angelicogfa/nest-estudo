@@ -1,32 +1,20 @@
-import { Controller, Get, UseGuards, Post, Body } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { User } from '../../common/security/decorators/user.decorator';
-import { CustomAuthGuard } from 'common/security/guards/custom-auth.guard';
+import { Controller, Get, UseGuards, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 import { SecurityService } from '../../common/security/services/security.service';
 
 @Controller('auth')
 export class AuthController {
 
-    constructor(private readonly securitySerice: SecurityService) {}
+    constructor(private readonly securitySerice: SecurityService) { }
+
+    readonly users = [];
 
     @Post('token')
-    async token(@Body('email') email) {
-        return await this.securitySerice.singIn(email);
-    }
+    @HttpCode(HttpStatus.OK)
+    async token(@Body('login') login, @Body('senha') senha) {
 
-    @Get('users')
-    @UseGuards(AuthGuard())
-    getAll(@User() user) {
-        console.log(user);
-        return [
-            {
-                nome: 'Jose'
-            }
-            ,
-            {
-                nome: 'Maria'
-            }
-        ];
+        return {
+            token: await this.securitySerice.singIn(login, senha),
+            expireIn: 3600
+        }
     }
-
 }

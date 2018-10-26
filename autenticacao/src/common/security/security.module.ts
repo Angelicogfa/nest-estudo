@@ -14,11 +14,16 @@ export const PassportJwtStrategyModyle: DynamicModule = PassportModule.register(
 @Module({
     imports: [UsersModule, PassportJwtStrategyModyle,  JwtModule.register({
         secretOrPrivateKey: 'secretKey',
+        verifyOptions: {
+            algorithms: ['HS256'],
+            ignoreExpiration: false,
+        },
         signOptions: {
-            expiresIn: 3600
+            expiresIn: 3600,
+            algorithm: 'HS256',
         }
     })],
-    providers: [HttpStrategy, JwtStrategy, UsersService, SecurityService],
+    providers: [HttpStrategy, JwtStrategy, SecurityService],
     exports: [HttpStrategy, JwtStrategy, SecurityService]
 })
 export class SecurityModule {

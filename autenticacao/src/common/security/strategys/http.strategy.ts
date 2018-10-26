@@ -2,7 +2,6 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { Strategy } from "passport-http-bearer";
 import { PassportStrategy } from "@nestjs/passport";
 import { SecurityService } from "../services/security.service";
-import { JwtService } from "@nestjs/jwt";
 
 
 @Injectable()
