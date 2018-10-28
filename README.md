@@ -8,6 +8,7 @@ Sequência
 * Hello-world
 * Controller
 * Autenticação
+* Banco de dados (com sql server)
 
 ## Instação
 
