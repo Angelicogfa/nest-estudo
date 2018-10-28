@@ -8,3 +8,13 @@ services:
       NODE_ENV: production
     ports:
       - 3000:3000
+    links:
+        - database
+  database:
+      image: mcr.microsoft.com/mssql/server
+      environment:
+        ACCEPT_EULA: Y
+        SA_PASSWORD: Zaq123*kiA
+        MSSQL_PID: Express
+      ports:
+        - 1433:1433

@@ -1,0 +1,14 @@
+{
+    "type": "mssql",
+    "database": "photodatabase",
+    "host": "localhost",
+    "username": "sa",
+    "password": "Zaq123*kiA",
+    "entities": ["src/**/entity/*.entity.ts"],
+    "synchronize": true,
+    "migrationsTableName": "migrations",
+    "migrations": ["src/common/database/migrations/*.ts'"],
+    "cli": {
+        "migrationsDir": "src/common/database/migrations"
+    }
+}
