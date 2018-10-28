@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   nest:
-    image: nest
+    image: nest-banco-dados
     build: .
     environment:
       NODE_ENV: production
